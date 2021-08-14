@@ -4,11 +4,13 @@ File Processor Application
 This application can be run to process a default file called records.cvs that is inside the jar.
 This application can also be run to process a file that you have on your system by giving it's absolute path.
 
+The repository has a folder called apidocs, that has generated javadocs.
+
 When you run the file using the following command
 
 java -jar file-processor.jar
 
-it will read the file inside the jar and give result on the basis of that file.
+it will read the file inside the jar and produce output for that file.
 
 If you run the file with an absolute path, it will process that file.
 
@@ -16,11 +18,14 @@ java -jar file-processor.jar "c://records.csv"
 
 This file has records as specified in the challenge brief.
 
-The repository has a folder called apidocs, that has generated javadocs.
+If the file has fewer columns than 6 it throws a runtime exception.
+If the file has more than 6 columns in a line, it ignores anything after first 6 columns.
+If the build duration does not follow the pattern of a String with all digits ending with s, the application throws an exception.
 
-It can be built using mvn
+You should have jdk installed on your machine. Please set JAVA_HOME to your jdk directory.
 
-I have set maven.compiler.release property to 11.  
+Please use mvn to build the application.
+I have set maven.compiler.release property to 11.  Please change version to whatever version you would like.
 
 To build please use: 
 mvn install
@@ -28,7 +33,6 @@ mvn install
 As a result of above command two jars get created in target folder. You would want to use the executable jar called file-processor.jar for testing purposes.
 
 When we run the jar we see the following output:
-
 
 2021-08-14 16:02:33 INFO FileProcessorApplication...
 2021-08-14 16:02:33 INFO Come to read file records.csv
