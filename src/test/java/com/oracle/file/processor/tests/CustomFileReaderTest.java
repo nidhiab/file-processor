@@ -25,8 +25,7 @@ class CustomFileReaderTest {
 	@Test
 	@DisplayName("File does not exist")
 	void testFileDoesNotExist() {
-		Throwable exception = assertThrows(ApplicationException.class,
-				() -> CustomFileReader.readFileInClassPath("recordsxxx.csv"));
+		Throwable exception = assertThrows(ApplicationException.class, () -> CustomFileReader.readFileInClassPath("recordsxxx.csv"));
 		assertEquals("Could not find file recordsxxx.csv", exception.getMessage());
 	}
 
@@ -39,8 +38,21 @@ class CustomFileReaderTest {
 	@Test
 	@DisplayName("Not enough columns in the lines in file")
 	void testNotEnoughColumns() {
-		Throwable exception = assertThrows(ApplicationException.class,
-				() -> CustomFileReader.readFileInClassPath("not_enough_columns.csv"));
+		Throwable exception = assertThrows(ApplicationException.class, () -> CustomFileReader.readFileInClassPath("not_enough_columns.csv"));
 		assertEquals("Not enough columns in record 2343225,2345,us_east,RedTeam", exception.getMessage());
+	}
+
+	@Test
+	@DisplayName("Build duration does not have digits preceding s.")
+	void testParseLineIntoObject_BuildDurationNotInCorrectFormat() {
+		Throwable exception = assertThrows(ApplicationException.class, () -> CustomFileReader.readFileInClassPath("build_duration_not_digits.csv"));
+		assertEquals("Build duration not in correct format aaas", exception.getMessage());
+	}
+
+	@Test
+	@DisplayName("Build duration does not end with s.")
+	void testParseLineIntoObject_BuildDurationNotInCorrectFormatDoesNotEndWith() {
+		Throwable exception = assertThrows(ApplicationException.class, () -> CustomFileReader.readFileInClassPath("build_duration_does_not_emd_with_s.csv"));
+		assertEquals("Build duration not in correct format 33333", exception.getMessage());
 	}
 }

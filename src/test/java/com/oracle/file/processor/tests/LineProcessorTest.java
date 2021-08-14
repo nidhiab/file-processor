@@ -12,6 +12,7 @@ import com.oracle.file.processor.services.LineProcessor;
 
 /**
  * This class tests LineProcessor
+ * 
  * @author NBhasin
  *
  */
@@ -31,6 +32,21 @@ class LineProcessorTest {
 	}
 
 	@Test
+	@DisplayName("Build duration does not have digits preceding s.")
+	void testParseLineIntoObject_BuildDurationNotInCorrectFormat() {
+		String line = "111111,2222,North,RedTeam,ProjectApple,aaaas";
+		Throwable exception = assertThrows(ApplicationException.class, () -> LineProcessor.parseLineIntoObject(line));
+		assertEquals("Build duration not in correct format aaaas", exception.getMessage());
+	}
+	@Test
+	@DisplayName("Build duration does not end with s.")
+	void testParseLineIntoObject_BuildDurationNotInCorrectFormatDoesNotEndWith() {
+		String line = "111111,2222,North,RedTeam,ProjectApple,1111";
+		Throwable exception = assertThrows(ApplicationException.class, () -> LineProcessor.parseLineIntoObject(line));
+		assertEquals("Build duration not in correct format 1111", exception.getMessage());
+	}
+
+	@Test
 	@DisplayName("Parsed line results into object, and all fields are mapped correctly. Extra columns are ignored.")
 	void testParseLineIntoObject_ExtraColumnsIgnored() {
 		String line = "111111,2222,North,RedTeam,ProjectApple,1000s,extra,soextra";
@@ -43,7 +59,7 @@ class LineProcessorTest {
 		assertEquals("ProjectApple", customerResord.getProjectCode());
 		assertEquals("1000s", customerResord.getBuildDuration());
 	}
-	
+
 	@Test
 	@DisplayName("Not enough columns in line being parsed.")
 	void testNotEnoughColumns() {
@@ -51,7 +67,7 @@ class LineProcessorTest {
 		Throwable exception = assertThrows(ApplicationException.class, () -> LineProcessor.parseLineIntoObject(line));
 		assertEquals("Not enough columns in record 111111", exception.getMessage());
 	}
-	
+
 	@Test
 	@DisplayName("Line being parsed is null.")
 	void testNullLine() {

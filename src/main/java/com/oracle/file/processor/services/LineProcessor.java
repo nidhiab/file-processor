@@ -10,6 +10,7 @@ import com.oracle.file.processor.pojos.FileRecord;
  *
  */
 public final class LineProcessor {
+	private static final String BUILD_DURATION_PATTERN = "^[0-9]*[s]{1}$";
 
 	/**
 	 * Private default constructor
@@ -31,6 +32,9 @@ public final class LineProcessor {
 		String[] columnsArray = line.trim().split(",");
 		if (columnsArray.length < 6) {
 			throw new ApplicationException(String.format("Not enough columns in record %s", line));
+		}
+		if(!columnsArray[5].matches(BUILD_DURATION_PATTERN)) {
+			throw new ApplicationException(String.format("Build duration not in correct format %s", columnsArray[5]));
 		}
 		//@formatter:off
 		return
