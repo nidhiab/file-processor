@@ -40,9 +40,9 @@ public final class StatisticsOrchestrator {
 			logger.log(Level.INFO, LOG_SEPARATOR);
 			StatisticsPrinter.printUniqueCustomerCountPerGeozone(customerPerGeozone);
 			logger.log(Level.INFO, LOG_SEPARATOR);
-			StatisticsPrinter.printUniqueCustomerPerGeozone(customerPerGeozone);
-			logger.log(Level.INFO, LOG_SEPARATOR);
 			StatisticsPrinter.printAverageBuildDurationPerGeozone(averageBuildDurationPreGeozone);
+			logger.log(Level.INFO, LOG_SEPARATOR);
+			StatisticsPrinter.printUniqueCustomerPerGeozone(customerPerGeozone);
 		}
 	}
 

@@ -5,8 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * This class hosts methods that are responsible for printing very specific statistics. 
- * The input passed in is of the shape that will allow the required information to be printed.
+ * This class hosts methods that are responsible for printing very specific statistics. The input passed in is of the shape that will allow the required information to be printed.
  * 
  * @author NBhasin
  *
@@ -47,7 +46,7 @@ public final class StatisticsPrinter {
 			logger.log(Level.INFO, "Going to find unique customers per contract");
 			for (var entry : map.entrySet()) {
 				if (entry.getValue() != null) {
-					logger.log(Level.INFO, "Contract {0} has {1} unique customers {2}", new Object[] { entry.getKey(), entry.getValue().size(), entry.getValue().keySet() });
+					logger.log(Level.INFO, "Contract {0} has {1} unique customers", new Object[] { entry.getKey(), entry.getValue().size() });
 				}
 			}
 		}
