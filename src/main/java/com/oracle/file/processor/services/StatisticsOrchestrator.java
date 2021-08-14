@@ -13,7 +13,7 @@ import com.oracle.file.processor.pojos.FileRecord;
  * @author NBhasin
  *
  */
-public class StatisticsOrchestrator {
+public final class StatisticsOrchestrator {
 	private static Logger logger = Logger.getLogger("StatisticsOrchestrator");
 	private static final String LOG_SEPARATOR = "------------------------------------------------";
 

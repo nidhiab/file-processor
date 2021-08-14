@@ -9,7 +9,7 @@ import com.oracle.file.processor.pojos.FileRecord;
  * @author NBhasin
  *
  */
-public class LineProcessor {
+public final class LineProcessor {
 
 	/**
 	 * Private default constructor
@@ -19,10 +19,7 @@ public class LineProcessor {
 	}
 
 	/**
-	 * This method parses an incoming line, splits it by comma, and produces a FileRecord object. 
-	 * It throws a runtime exception if it receives null for the line. 
-	 * It throws a runtime exception if the number of columns are fewer than 6. 
-	 * If the number of columns are greater than 6, it ignores the rest.
+	 * This method parses an incoming line, splits it by comma, and produces a FileRecord object. It throws a runtime exception if it receives null for the line. It throws a runtime exception if the number of columns are fewer than 6. If the number of columns are greater than 6, it ignores the rest.
 	 * 
 	 * @param line - to process
 	 * @return created FileRecord
