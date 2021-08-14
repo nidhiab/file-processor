@@ -49,10 +49,10 @@ public final class CustomFileReader {
 				FileRecord customerRecord = LineProcessor.parseLineIntoObject(line);
 				records.add(customerRecord);
 			}
+			inputStream.close();
 		} catch (IOException e) {
 			throw new ApplicationException(String.format("Error occurred while trying to read file %s", fileName), e);
 		}
 		return records;
 	}
-
 }
