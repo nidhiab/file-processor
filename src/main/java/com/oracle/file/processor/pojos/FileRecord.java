@@ -14,6 +14,15 @@ public final class FileRecord {
 	private String projectCode;
 	private String buildDuration;
 
+	/**
+	 * Parameterized constructor
+	 * @param customerId - customer id
+	 * @param contractId - contract id
+	 * @param geozone - geozone
+	 * @param teamCode - team code
+	 * @param projectCode - project code
+	 * @param buildDuration - build duration
+	 */
 	public FileRecord(String customerId, String contractId, String geozone, String teamCode, String projectCode, String buildDuration) {
 		super();
 		this.customerId = customerId;
@@ -24,26 +33,50 @@ public final class FileRecord {
 		this.buildDuration = buildDuration;
 	}
 
+	/**
+	 * Getter for customerId
+	 * @return customerId
+	 */
 	public String getCustomerId() {
 		return customerId;
 	}
 
+	/**
+	 * Getter for contractId
+	 * @return contractId
+	 */
 	public String getContractId() {
 		return contractId;
 	}
 
+	/**
+	 * Getter for geozone
+	 * @return geozone
+	 */
 	public String getGeozone() {
 		return geozone;
 	}
 
+	/**
+	 * Getter for teamCode
+	 * @return teamCode
+	 */
 	public String getTeamCode() {
 		return teamCode;
 	}
 
+	/**
+	 * Getter for projectCode
+	 * @return projectCode
+	 */
 	public String getProjectCode() {
 		return projectCode;
 	}
 
+	/**
+	 * Getter for buildDuration
+	 * @return buildDuration
+	 */
 	public String getBuildDuration() {
 		return buildDuration;
 	}
@@ -68,10 +101,17 @@ public final class FileRecord {
 		private FileRecordBuilder() {
 		}
 
+		/**
+		 * Returns an instance of FileRecordBuilder
+		 * @return FileRecordBuilder
+		 */
 		public static CustomerId getInstance() {
 			return new FileRecordBuilder();
 		}
 
+		/**
+		 * Build method that builds the underlying object
+		 */
 		@Override
 		public FileRecord build() {
 			return new FileRecord(customerId, contractId, geozone, teamCode, projectCode, buildDuration);

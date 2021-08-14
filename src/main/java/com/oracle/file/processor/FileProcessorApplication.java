@@ -27,6 +27,10 @@ public class FileProcessorApplication {
 	}
 	private static Logger logger = Logger.getLogger(FileProcessorApplication.class.getName());
 
+	/**
+	 * Entry point into FileProcessorApplication
+	 * @param args - String args
+	 */
 	public static void main(String args[]) {
 		logger.log(Level.INFO, "FileProcessorApplication...");
 		List<FileRecord> recordsList = CustomFileReader.readFile("records.csv");
