@@ -1,10 +1,8 @@
 # file-processor
 File Processor Application
 
-This application can be run to process a default file called records.cvs that is inside the jar.
+This application can be run to process a default file called records.cvs that is inside the jar.<br/>
 This application can also be run to process a file that you have on your system by giving it's absolute path.
-
-The repository has a folder called apidocs, that has generated javadocs.
 
 When you run the file using the following command
 
@@ -58,3 +56,5 @@ When we run the jar we see the following output:
 2021-08-14 16:02:33 INFO Geozone us_east has unique customers [2343225]
 
 
+
+The repository has a folder called apidocs, that has generated javadocs.
