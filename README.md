@@ -1,7 +1,19 @@
 # file-processor
 File Processor Application
 
-This application processes a file - records.csv that is placed in the resources folder.
+This application can be run to process a default file called records.cvs that is inside the jar.
+This application can also be run to process a file that you have on your system by giving it's absolute path.
+
+When you run the file using the following command
+
+java -jar file-processor.jar
+
+it will read the file inside the jar and give result on the basis of that file.
+
+If you run the file with an absolute path, it will process that file.
+
+java -jar file-processor.jar "c://records.csv"
+
 This file has records as specified in the challenge brief.
 
 The repository has a folder called apidocs, that has generated javadocs.
