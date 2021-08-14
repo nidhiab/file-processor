@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import com.oracle.file.processor.exceptions.ApplicationException;
 import com.oracle.file.processor.pojos.FileRecord;
@@ -32,21 +34,6 @@ class LineProcessorTest {
 	}
 
 	@Test
-	@DisplayName("Build duration does not have digits preceding s.")
-	void testParseLineIntoObject_BuildDurationNotInCorrectFormat() {
-		String line = "111111,2222,North,RedTeam,ProjectApple,aaaas";
-		Throwable exception = assertThrows(ApplicationException.class, () -> LineProcessor.parseLineIntoObject(line));
-		assertEquals("Build duration not in correct format aaaas", exception.getMessage());
-	}
-	@Test
-	@DisplayName("Build duration does not end with s.")
-	void testParseLineIntoObject_BuildDurationNotInCorrectFormatDoesNotEndWith() {
-		String line = "111111,2222,North,RedTeam,ProjectApple,1111";
-		Throwable exception = assertThrows(ApplicationException.class, () -> LineProcessor.parseLineIntoObject(line));
-		assertEquals("Build duration not in correct format 1111", exception.getMessage());
-	}
-
-	@Test
 	@DisplayName("Parsed line results into object, and all fields are mapped correctly. Extra columns are ignored.")
 	void testParseLineIntoObject_ExtraColumnsIgnored() {
 		String line = "111111,2222,North,RedTeam,ProjectApple,1000s,extra,soextra";
@@ -65,7 +52,7 @@ class LineProcessorTest {
 	void testNotEnoughColumns() {
 		String line = "111111";
 		Throwable exception = assertThrows(ApplicationException.class, () -> LineProcessor.parseLineIntoObject(line));
-		assertEquals("Not enough columns in record 111111", exception.getMessage());
+		assertEquals("Either not enough columns or empty value for columns in record 111111", exception.getMessage());
 	}
 
 	@Test
@@ -74,4 +61,26 @@ class LineProcessorTest {
 		Throwable exception = assertThrows(ApplicationException.class, () -> LineProcessor.parseLineIntoObject(null));
 		assertEquals("Received null for incoming line", exception.getMessage());
 	}
+
+	@Test
+	@DisplayName("Line has no content just commas")
+	void testParseLineIntoObject_EmptyColumns() {
+		String line = ",,,,,";
+		Throwable exception = assertThrows(ApplicationException.class, () -> LineProcessor.parseLineIntoObject(line));
+		assertEquals("Either not enough columns or empty value for columns in record ,,,,,", exception.getMessage());
+	}
+	
+	@ParameterizedTest
+	@DisplayName("Build duration does not follow regex pattern ^[0-9]*[s]{1}$")
+	//@formatter:off
+	@CsvSource(value = { 
+			"111111,2222,North,RedTeam,ProjectApple,5555ss:Build duration not in correct format 5555ss", 
+			"111111,2222,North,RedTeam,ProjectApple,aaaas:Build duration not in correct format aaaas", 
+			"111111,2222,North,RedTeam,ProjectApple,1111:Build duration not in correct format 1111" }, delimiter = ':')
+	//@formatter:on
+	void testParseLineIntoObject_BuildDurationNotFollowingRequiredPattern(String input, String expected) {
+		Throwable exception = assertThrows(ApplicationException.class, () -> LineProcessor.parseLineIntoObject(input));
+		assertEquals(expected, exception.getMessage());
+	}
+
 }

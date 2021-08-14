@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import com.oracle.file.processor.exceptions.ApplicationException;
 import com.oracle.file.processor.services.CustomFileReader;
@@ -24,35 +26,41 @@ class CustomFileReaderTest {
 
 	@Test
 	@DisplayName("File does not exist")
-	void testFileDoesNotExist() {
+	void testReadFileInClassPath_FileDoesNotExist() {
 		Throwable exception = assertThrows(ApplicationException.class, () -> CustomFileReader.readFileInClassPath("recordsxxx.csv"));
 		assertEquals("Could not find file recordsxxx.csv", exception.getMessage());
 	}
 
 	@Test
 	@DisplayName("File is empty. Records returned should be 0.")
-	void testEmptyFile() {
+	void testReadFileInClassPath_EmptyFile() {
 		assertEquals(0, CustomFileReader.readFileInClassPath("empty_file.csv").size());
 	}
 
 	@Test
 	@DisplayName("Not enough columns in the lines in file")
-	void testNotEnoughColumns() {
+	void testReadFileInClassPath_NotEnoughColumns() {
 		Throwable exception = assertThrows(ApplicationException.class, () -> CustomFileReader.readFileInClassPath("not_enough_columns.csv"));
-		assertEquals("Not enough columns in record 2343225,2345,us_east,RedTeam", exception.getMessage());
+		assertEquals("Either not enough columns or empty value for columns in record 2343225,2345,us_east,RedTeam", exception.getMessage());
 	}
 
 	@Test
-	@DisplayName("Build duration does not have digits preceding s.")
-	void testParseLineIntoObject_BuildDurationNotInCorrectFormat() {
-		Throwable exception = assertThrows(ApplicationException.class, () -> CustomFileReader.readFileInClassPath("build_duration_not_digits.csv"));
-		assertEquals("Build duration not in correct format aaas", exception.getMessage());
+	@DisplayName("Line has no content just commas")
+	void testReadFileInClassPath_EmptyColumns() {
+		Throwable exception = assertThrows(ApplicationException.class, () -> CustomFileReader.readFileInClassPath("empty_values_columns.csv"));
+		assertEquals("Either not enough columns or empty value for columns in record ,,,,,", exception.getMessage());
 	}
 
-	@Test
-	@DisplayName("Build duration does not end with s.")
-	void testParseLineIntoObject_BuildDurationNotInCorrectFormatDoesNotEndWith() {
-		Throwable exception = assertThrows(ApplicationException.class, () -> CustomFileReader.readFileInClassPath("build_duration_does_not_emd_with_s.csv"));
-		assertEquals("Build duration not in correct format 33333", exception.getMessage());
+	@ParameterizedTest
+	@DisplayName("Build duration does not follow regex pattern ^[0-9]*[s]{1}$")
+	//@formatter:off
+	@CsvSource(value = { 
+			"build_duration_not_digits.csv:Build duration not in correct format aaas", 
+			"build_duration_does_not_end_with_s.csv:Build duration not in correct format 33333" }, delimiter = ':')
+	//@formatter:on
+	void testReadFileInClassPath_BuildDurationNotFollowingRequiredPattern(String input, String expected) {
+		Throwable exception = assertThrows(ApplicationException.class, () -> CustomFileReader.readFileInClassPath(input));
+		assertEquals(expected, exception.getMessage());
 	}
+
 }

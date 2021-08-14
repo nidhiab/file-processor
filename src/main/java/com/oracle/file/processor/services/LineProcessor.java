@@ -20,7 +20,14 @@ public final class LineProcessor {
 	}
 
 	/**
-	 * This method parses an incoming line, splits it by comma, and produces a FileRecord object. It throws a runtime exception if it receives null for the line. It throws a runtime exception if the number of columns are fewer than 6. If the number of columns are greater than 6, it ignores the rest.
+	 * This method parses an incoming line, splits it by comma, and produces a FileRecord object. 
+	 * It throws a runtime exception if-
+	 * it receives null for the line. 
+	 * the number of columns are fewer than 6. 
+	 * any of the columns is null or empty/blank. 
+	 * build duration does not follow the pattern of all digits followed by single character s  (^[0-9]*[s]{1}$)
+	 * 
+	 * If the number of columns are greater than 6, it ignores the rest.
 	 * 
 	 * @param line - to process
 	 * @return created FileRecord
@@ -29,22 +36,23 @@ public final class LineProcessor {
 		if (line == null) {
 			throw new ApplicationException("Received null for incoming line");
 		}
-		String[] columnsArray = line.trim().split(",");
+		String[] columnsArray = line.trim().split(","); // Ignoring empty columns. Every column is mandatory and not empty/blank String for our purposes.
 		if (columnsArray.length < 6) {
-			throw new ApplicationException(String.format("Not enough columns in record %s", line));
+			throw new ApplicationException(String.format("Either not enough columns or empty value for columns in record %s", line));
 		}
-		if(!columnsArray[5].matches(BUILD_DURATION_PATTERN)) {
-			throw new ApplicationException(String.format("Build duration not in correct format %s", columnsArray[5]));
+		String buildDurationColumn = columnsArray[5].trim();
+		if (!buildDurationColumn.matches(BUILD_DURATION_PATTERN)) {
+			throw new ApplicationException(String.format("Build duration not in correct format %s", buildDurationColumn));
 		}
 		//@formatter:off
 		return
 		FileRecord.FileRecordBuilder.getInstance()
-		.setCustomerId(columnsArray[0])
-		.setContractId(columnsArray[1])
-		.setGeozone(columnsArray[2])
-		.setTeamCode(columnsArray[3])
-		.setProjectCode(columnsArray[4])
-		.setBuildDuration(columnsArray[5])
+		.setCustomerId(columnsArray[0].trim())
+		.setContractId(columnsArray[1].trim())
+		.setGeozone(columnsArray[2].trim())
+		.setTeamCode(columnsArray[3].trim())
+		.setProjectCode(columnsArray[4].trim())
+		.setBuildDuration(buildDurationColumn)
 		.build();
 		//@formatter:on
 	}
