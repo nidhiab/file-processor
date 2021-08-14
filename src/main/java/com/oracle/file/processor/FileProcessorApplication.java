@@ -12,8 +12,8 @@ import com.oracle.file.processor.services.CustomFileReader;
 import com.oracle.file.processor.services.StatisticsOrchestrator;
 
 /**
- * FileProcessorApplication class hosts the entry point for this application.
- * This application reads a file, generates required statistics and then prints those.
+ * FileProcessorApplication class hosts the entry point for this application. This application reads a file, generates required statistics and then prints those.
+ * 
  * @author NBhasin
  *
  */
@@ -29,11 +29,17 @@ public class FileProcessorApplication {
 
 	/**
 	 * Entry point into FileProcessorApplication
+	 * 
 	 * @param args - String args
 	 */
 	public static void main(String args[]) {
 		logger.log(Level.INFO, "FileProcessorApplication...");
-		List<FileRecord> recordsList = CustomFileReader.readFile("records.csv");
+		List<FileRecord> recordsList;
+		if (args != null && args.length > 0) {
+			recordsList = CustomFileReader.readFile(args[0]);
+		} else {
+			recordsList = CustomFileReader.readFileInClassPath("records.csv");
+		}
 		StatisticsOrchestrator.process(recordsList);
 
 	}
