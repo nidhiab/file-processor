@@ -4,14 +4,24 @@ File Processor Application
 This application can be run to process a default file called records.cvs that is inside the jar.<br/>
 This application can also be run to process a file that you have on your system by giving it's absolute path.
 
-# build instructions
-You should have jdk installed on your machine. 
-Set JAVA_HOME to your jdk directory. <br/>
+# pre-requisites
+You should have jdk installed on your machine. Anything later than 9 would work.
 
-In the accompanying pom.xml, maven.compiler.release property is set to 15. <br/> 
+Set JAVA_HOME to your jdk directory. <br/>
+Set PATH variable to have %JAVA_HOME%\bin  Add this to the beginning of the PATH.
+
+You also need maven on your machine
+https://maven.apache.org/download.cgi
+
+Please follow instructions as specified in 
+https://maven.apache.org/users/index.html
+
+# align versions
+In the project pom.xml, maven.compiler.release property is set to 15. <br/> 
 Change maven.compiler.release version corresponding to JAVA_HOME above <br/>
 
-To build use: 
+# build instructions
+To build run: 
 mvn install
 
 # running the jar
