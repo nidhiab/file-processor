@@ -20,10 +20,11 @@ If the file has fewer columns than 6 it throws a runtime exception.<br/>
 If the file has more than 6 columns in a line, it ignores anything after first 6 columns.<br/>
 If the build duration does not follow the pattern of a String with all digits ending with s, the application throws an exception.
 
-You should have jdk installed on your machine. Set JAVA_HOME to your jdk directory.
+You should have jdk installed on your machine. 
+Set JAVA_HOME to your jdk directory. <br/>
 
-Please use mvn to build the application.
-I have set maven.compiler.release property to 11.  Please change version to whatever you would like.
+I have set maven.compiler.release property in pom.xml to 15. <br/> 
+You may need to change version corresponding to JAVA_HOME above <br/>
 
 To build use: 
 mvn install
