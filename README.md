@@ -8,7 +8,7 @@ This application can also be run to process a file that you have on your system 
 You should have jdk installed on your machine. Anything later than 9 would work.<br/>
 
 Set JAVA_HOME to your jdk directory. <br/>
-Set PATH variable to have %JAVA_HOME%\bin  Add this to the beginning of the PATH.<br/>
+Set PATH variable to have %JAVA_HOME%\bin at the beginning of the PATH.<br/>
 
 You also need maven on your machine <br/>
 https://maven.apache.org/download.cgi
