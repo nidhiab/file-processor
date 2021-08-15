@@ -41,7 +41,7 @@ Please note that this name would change according to your file name. Just pass t
 
 java -jar file-processor.jar "c://outside_records.csv"   
 
-# file Validations
+# file validations
 This file should have records as specified in the brief.
 
 If the file has fewer columns than 6 it throws a runtime exception.<br/>
