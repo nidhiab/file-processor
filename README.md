@@ -14,7 +14,7 @@ If you run the file with an absolute path, it will process that file.
 
 java -jar file-processor.jar "c://records.csv"
 
-This file should have records as specified in the challenge brief.
+This file should have records as specified in the brief.
 
 If the file has fewer columns than 6 it throws a runtime exception.<br/>
 If the file has more than 6 columns in a line, it ignores anything after first 6 columns.<br/>
