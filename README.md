@@ -31,7 +31,8 @@ To build run:  <br/>
 mvn install
 
 # running the jar
-As a result of above command two jars get created in target folder. You would want to use the executable jar called file-processor.jar for testing purposes.
+As a result of above command two jars get created in target folder. <projectroot>\target   <br/> 
+You would want to use the executable jar called file-processor.jar for testing purposes.
 
 When you run the file using the following command
 
