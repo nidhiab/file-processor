@@ -19,7 +19,7 @@ https://maven.apache.org/download.cgi
 Documentation at  <br/>
 https://maven.apache.org/users/index.html
 
-installation instructions
+Installation instructions <br/>
 https://maven.apache.org/install.html
 
 # align versions
