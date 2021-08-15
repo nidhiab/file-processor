@@ -27,7 +27,7 @@ In the project pom.xml, maven.compiler.release property is set to 15. <br/>
 Change maven.compiler.release version corresponding to JAVA_HOME above <br/>
 
 # build instructions
-To build run: 
+To build run:  <br/> 
 mvn install
 
 # running the jar
