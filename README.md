@@ -4,6 +4,9 @@ File Processor Application
 This application can be run to process a default file called records.cvs that is inside the jar.<br/>
 This application can also be run to process a file that you have on your system by giving it's absolute path.
 
+# get code
+git clone https://github.com/nidhiab/file-processor.git
+
 # pre-requisites
 You should have jdk installed on your machine. Anything later than 9 would work.<br/>
 
