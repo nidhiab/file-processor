@@ -16,8 +16,11 @@ Set PATH variable to have %JAVA_HOME%\bin at the beginning of the PATH.<br/>
 You also need maven on your machine <br/>
 https://maven.apache.org/download.cgi
 
-Please follow instructions as specified in  <br/>
+Documentation at  <br/>
 https://maven.apache.org/users/index.html
+
+installation instructions
+https://maven.apache.org/install.html
 
 # align versions
 In the project pom.xml, maven.compiler.release property is set to 15. <br/> 
