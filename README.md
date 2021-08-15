@@ -23,10 +23,10 @@ Installation instructions <br/>
 https://maven.apache.org/install.html
 
 # align versions
-In the project pom.xml, maven.compiler.release property is set to 15 as shown below. <br/> 
+In the project pom.xml, maven.compiler.release property is set to 11 as shown below. <br/> 
 
 	<properties> 
-		<maven.compiler.release>15</maven.compiler.release> 
+		<maven.compiler.release>11</maven.compiler.release> 
 	</properties>
   
 Change maven.compiler.release version corresponding to your java version <br/>
