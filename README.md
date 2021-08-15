@@ -41,7 +41,7 @@ java -jar file-processor.jar
 it will read the records.csv file inside the jar and produce output for that file.
 
 If you run the file with an absolute path, it will process that file. <br/>
-Please note that this name would change according to your file name. Just pass the absolute file path to the program. <br/>
+Please note that this name would change according to your file name. Just pass the absolute file path including name to the program as shown below. <br/>
 
 java -jar file-processor.jar "c://outside_records.csv"   
 
