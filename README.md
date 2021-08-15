@@ -24,14 +24,14 @@ https://maven.apache.org/install.html
 
 # align versions
 In the project pom.xml, maven.compiler.release property is set to 15. <br/> 
-Change maven.compiler.release version corresponding to JAVA_HOME above <br/>
+Change maven.compiler.release version corresponding to your java version <br/>
 
 # build instructions
 To build run:  <br/> 
 mvn install
 
 # running the jar
-As a result of above command two jars get created in target folder. <projectroot>\target   <br/> 
+As a result of above command two jars get created in target folder that gets created inside the project root directory <br/> 
 You would want to use the executable jar called file-processor.jar for testing purposes.
 
 When you run the file using the following command
